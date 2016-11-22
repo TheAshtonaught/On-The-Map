@@ -41,6 +41,8 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     @IBAction func LoginBtnPressed(_ sender: AnyObject) {
         configureUI(active: false)
         
+        if Reachability.isConnectedToNetwork() {
+        
         if emailLabel.text!.isEmpty || passwordLabel.text!.isEmpty{
            displayError("Login Error", errorMsg: "Missing a Username/password")
         } else {
@@ -63,8 +65,10 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                 }
             })
         }
-        
-        
+        } else {
+            displayError("Connection error", errorMsg: "There is no internet connection")
+            configureUI(active: true)
+        }
     }
     
     func configureUI(active: Bool) {

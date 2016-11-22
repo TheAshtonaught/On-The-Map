@@ -19,6 +19,7 @@
 		276386C41DCA9900009B6730 /* ApiConvience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276386C31DCA9900009B6730 /* ApiConvience.swift */; };
 		276386C61DCA9C92009B6730 /* ApiConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276386C51DCA9C92009B6730 /* ApiConstants.swift */; };
 		276DE3451DC729AA0003E2EE /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276DE3441DC729AA0003E2EE /* ParseConstants.swift */; };
+		27AE29321DE41EDB0025B4CF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AE29311DE41EDB0025B4CF /* Reachability.swift */; };
 		27B0352C1DD5497400CF51D0 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B0352B1DD5497400CF51D0 /* MapVC.swift */; };
 		27D7EABE1DCBFD4800662DBA /* UdacityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D7EABD1DCBFD4800662DBA /* UdacityConstants.swift */; };
 		27D7EAC01DCBFD5A00662DBA /* UdacityConvience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D7EABF1DCBFD5A00662DBA /* UdacityConvience.swift */; };
@@ -42,6 +43,7 @@
 		276386C31DCA9900009B6730 /* ApiConvience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiConvience.swift; sourceTree = "<group>"; };
 		276386C51DCA9C92009B6730 /* ApiConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiConstants.swift; sourceTree = "<group>"; };
 		276DE3441DC729AA0003E2EE /* ParseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConstants.swift; sourceTree = "<group>"; };
+		27AE29311DE41EDB0025B4CF /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		27B0352B1DD5497400CF51D0 /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		27D7EABD1DCBFD4800662DBA /* UdacityConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConstants.swift; sourceTree = "<group>"; };
 		27D7EABF1DCBFD5A00662DBA /* UdacityConvience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConvience.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				27F49F1B1DC155D30001DA44 /* Main.storyboard */,
 				27F49F201DC155D30001DA44 /* LaunchScreen.storyboard */,
 				27F49F1E1DC155D30001DA44 /* Assets.xcassets */,
+				27AE29311DE41EDB0025B4CF /* Reachability.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				27D7EABE1DCBFD4800662DBA /* UdacityConstants.swift in Sources */,
 				276DE3451DC729AA0003E2EE /* ParseConstants.swift in Sources */,
 				273EB4051DD9C7F0007AB9EA /* annotationStyle.swift in Sources */,
+				27AE29321DE41EDB0025B4CF /* Reachability.swift in Sources */,
 				27D7EAC01DCBFD5A00662DBA /* UdacityConvience.swift in Sources */,
 				2710BCE41DCF37EC00A12A02 /* Location.swift in Sources */,
 				2710BCE01DCF1AC100A12A02 /* ParseConvience.swift in Sources */,
