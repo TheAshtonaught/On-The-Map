@@ -12,7 +12,7 @@ import MapKit
 class addLinkVC: UIViewController, UITextFieldDelegate{
     
     var placemark: CLPlacemark!
-    var appDel: AppDelegate!
+    var global = Global.sharedClient()
     var mapString: String!
     var objectID: String? = nil
     let parseClient = ParseConvience.sharedClient()
@@ -22,7 +22,6 @@ class addLinkVC: UIViewController, UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        appDel = UIApplication.shared.delegate as! AppDelegate
         locationMapView.showAnnotations([MKPlacemark(placemark: placemark)], animated: true)
     }
     
@@ -43,23 +42,23 @@ class addLinkVC: UIViewController, UITextFieldDelegate{
         let url = linkTextField.text!
         
         if let objectID = objectID {
-            parseClient.overwriteLocation(objectID, mediaUrl: url, studentLocation: StudentLocation(objectId: objectID, student: appDel.currentStudent!, location: location))  { (success, error) in
+            parseClient.overwriteLocation(objectID, mediaUrl: url, studentLocation: StudentLocation(objectId: objectID, student: global.currentStudent!, location: location))  { (success, error) in
                 DispatchQueue.main.async {
                 if let _ = error {
                     self.displayAlert("Error", errorMsg: "Could Not post location")
                 } else {
-                    self.appDel.currentStudent?.mediaUrl = url
+                    self.global.currentStudent?.mediaUrl = url
                     self.navigationController?.dismiss(animated: true, completion: nil)
                     }
                 }
             }
         } else {
-            parseClient.postLocation(StudentLocation(objectId: "", student: appDel.currentStudent!, location: location), mediaUrl: url, completionHandler: { (success, error) in
+            parseClient.postLocation(StudentLocation(objectId: "", student: global.currentStudent!, location: location), mediaUrl: url, completionHandler: { (success, error) in
                 DispatchQueue.main.async{
                 if let _ = error {
                     self.displayAlert("Error", errorMsg: "Could Not post location")
                 } else {
-                    self.appDel.currentStudent?.mediaUrl = url
+                    self.global.currentStudent?.mediaUrl = url
                     self.presentTabBar()
                 }
                 }

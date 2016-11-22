@@ -98,7 +98,7 @@ class ParseConvience {
             BodyKeys.Longitude: studentLocation._location.longitude as AnyObject
         ]
         
-        parseApiRequest(url: locationUrl, method: "POST") { (jsonAsDictionary, error) in
+        parseApiRequest(url: locationUrl, method: "POST", body: body) { (jsonAsDictionary, error) in
             guard error == nil else {
                 completionHandler(false, error)
                 return

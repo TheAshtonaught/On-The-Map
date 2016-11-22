@@ -12,31 +12,30 @@ class TableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let udacityClient = UdacityConvience.sharedClient()
     let parseClient = ParseConvience.sharedClient()
-    var appDel: AppDelegate!
+    var global = Global.sharedClient()
     var currentStudent: Student? = nil
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        appDel = UIApplication.shared.delegate as! AppDelegate
         
         updateStudentLocations()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appDel.studentLocations.count
+        return global.studentLocations.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentCell") as! StudentCell
-        let location = appDel.studentLocations[(indexPath as NSIndexPath).row]
+        let location = global.studentLocations[(indexPath as NSIndexPath).row]
         cell.setCell(location)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let mediaUrl = appDel.studentLocations[(indexPath as NSIndexPath).row]._student.mediaUrl
+        let mediaUrl = global.studentLocations[(indexPath as NSIndexPath).row]._student.mediaUrl
         
         if let url = URL(string: mediaUrl) {
             if UIApplication.shared.canOpenURL(url) {
@@ -53,7 +52,7 @@ class TableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         updateStudentLocations()
     }
     @IBAction func addLocation(_ sender: AnyObject) {
-        if let currentStudent = appDel.currentStudent {
+        if let currentStudent = global.currentStudent {
             parseClient.studentLocation(currentStudent.uniqueKey, completionHandler: { (location, error) in
                 DispatchQueue.main.async {
                     if let loc = location {
@@ -83,7 +82,7 @@ class TableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if let error = error {
                 self.displayAlert("Failed to get student locations", errorMsg: error.localizedDescription)
             } else {
-                self.appDel.studentLocations = locations!
+                self.global.studentLocations = locations!
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }

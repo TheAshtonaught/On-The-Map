@@ -11,7 +11,7 @@ import UIKit
 class LoginVC: UIViewController, UITextFieldDelegate {
     
     let udacityClient = UdacityConvience.sharedClient()
-    var appDelegate: AppDelegate!
+    var global = Global.sharedClient()
     
     @IBOutlet weak var emailLabel: UITextField!
     @IBOutlet weak var passwordLabel: UITextField!
@@ -21,8 +21,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        appDelegate = UIApplication.shared.delegate as! AppDelegate
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +50,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                         self.udacityClient.getStudent(userKey, completionHandler: { (student, error) in
                             DispatchQueue.main.async {
                                 if let student = student {
-                                    self.appDelegate.currentStudent = student
+                                    self.global.currentStudent = student
                                     self.performSegue(withIdentifier: "login", sender: self)
                                 } else {
                                     self.displayError("Login error", errorMsg: error!.localizedDescription)

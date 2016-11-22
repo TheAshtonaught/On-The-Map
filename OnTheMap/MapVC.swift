@@ -13,19 +13,17 @@ class MapVC: UIViewController, MKMapViewDelegate {
     
     let udacityClient = UdacityConvience.sharedClient()
     let parseClient = ParseConvience.sharedClient()
-    var appDel: AppDelegate!
+    let global = Global.sharedClient()
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        appDel = UIApplication.shared.delegate as! AppDelegate
         updateStudentLocations()
     }
     
-    
     @IBAction func addLocation(_ sender: AnyObject) {
-        if let currentStudent = appDel.currentStudent {
+        if let currentStudent = global.currentStudent {
           parseClient.studentLocation(currentStudent.uniqueKey, completionHandler: { (location, error) in
             DispatchQueue.main.async {
                 if let loc = location {
@@ -55,7 +53,7 @@ class MapVC: UIViewController, MKMapViewDelegate {
     func addAnnotations() {
         var annotationArray = [MKPointAnnotation]()
         
-        for location in appDel.studentLocations {
+        for location in global.studentLocations {
             let annotation = MKPointAnnotation()
             annotation.coordinate = location._location.coordinate
             annotation.title = "\(location._student.firstName) \(location._student.lastName)"
@@ -76,7 +74,7 @@ class MapVC: UIViewController, MKMapViewDelegate {
             if let error = error {
                 self.displayAlert("Failed to get student locations", errorMsg: error.localizedDescription)
             } else {
-                self.appDel.studentLocations = locations!
+                self.global.studentLocations = locations!
                 DispatchQueue.main.async {
                     self.addAnnotations()
                 }

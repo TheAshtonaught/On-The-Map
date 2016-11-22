@@ -13,7 +13,7 @@ class addLocationVC: UIViewController, UITextFieldDelegate {
 
     var objectID: String? = nil
     let parseClient = ParseConvience.sharedClient()
-    var appDel: AppDelegate!
+    var global = Global.sharedClient()
     var placemark: CLPlacemark? = nil
     
     @IBOutlet weak var locationTextField: UITextField!
@@ -22,7 +22,6 @@ class addLocationVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         startActivity(loading: false)
-        appDel = UIApplication.shared.delegate as! AppDelegate
     }
 
     @IBAction func findOnTheMap(_ sender: AnyObject) {
