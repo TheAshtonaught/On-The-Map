@@ -4,7 +4,7 @@
 //
 //  Created by Ashton Morgan on 11/22/16.
 //  Copyright © 2016 algebet. All rights reserved.
-//
+//  source: http://stackoverflow.com/questions/38726100/best-approach-for-checking-internet-connection-in-ios
 
 import Foundation
 import SystemConfiguration
