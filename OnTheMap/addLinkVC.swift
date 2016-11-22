@@ -23,12 +23,7 @@ class addLinkVC: UIViewController, UITextFieldDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         appDel = UIApplication.shared.delegate as! AppDelegate
-
         locationMapView.showAnnotations([MKPlacemark(placemark: placemark)], animated: true)
-    }
-
-    @IBAction func cancel(_ sender: AnyObject) {
-        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func submit(_ sender: AnyObject) {
@@ -54,8 +49,8 @@ class addLinkVC: UIViewController, UITextFieldDelegate{
                     self.displayAlert("Error", errorMsg: "Could Not post location")
                 } else {
                     self.appDel.currentStudent?.mediaUrl = url
-                    self.presentTabBar()
-                }
+                    self.navigationController?.dismiss(animated: true, completion: nil)
+                    }
                 }
             }
         } else {

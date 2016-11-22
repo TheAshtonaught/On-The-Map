@@ -71,7 +71,7 @@ class TableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBAction func logout(_ sender: AnyObject) {
         udacityClient.logout { (success, error) in
             DispatchQueue.main.async {
-                self.presentLoginVC()
+                self.tabBarController?.dismiss(animated: true, completion: nil)
             }
         }
     }

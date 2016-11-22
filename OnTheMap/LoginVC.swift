@@ -90,7 +90,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         configureUI(active: true)
         let alert = UIAlertController(title: errorTitle, message: errorMsg, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
         
     }
     

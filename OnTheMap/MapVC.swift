@@ -47,7 +47,7 @@ class MapVC: UIViewController, MKMapViewDelegate {
     @IBAction func logout(_ sender: AnyObject) {
       udacityClient.logout { (success, error) in
         DispatchQueue.main.async {
-            self.presentLoginVC()
+            self.tabBarController?.dismiss(animated: true, completion: nil)
             }
         }
     }
@@ -118,12 +118,8 @@ class MapVC: UIViewController, MKMapViewDelegate {
         if let objectID = objectID {
             addLocVC.objectID = objectID
         }
-        self.present(addLocVC, animated: true, completion: nil)
-    }
-    
-    func presentLoginVC() {
-        let loginVC = self.storyboard!.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-        self.present(loginVC, animated: true, completion: nil)
+        let navController = UINavigationController(rootViewController: addLocVC)
+        present(navController, animated:true, completion: nil)
     }
 
 }

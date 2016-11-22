@@ -17,16 +17,19 @@ class addLocationVC: UIViewController, UITextFieldDelegate {
     var placemark: CLPlacemark? = nil
     
     @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        startActivity(loading: false)
         appDel = UIApplication.shared.delegate as! AppDelegate
     }
 
     @IBAction func findOnTheMap(_ sender: AnyObject) {
+        startActivity(loading: true)
         if locationTextField.text!.isEmpty {
             displayAlert("Location Field empty", errorMsg: "Please enter a location")
+            startActivity(loading: false)
             return
         }
         
@@ -36,11 +39,14 @@ class addLocationVC: UIViewController, UITextFieldDelegate {
                 geocoder.geocodeAddressString(self.locationTextField.text!, completionHandler: { (results, error) in
                     if let err = error {
                         self.displayAlert("Error", errorMsg: "Failed to Geocode Location")
+                        self.startActivity(loading: false)
                     } else if (results!.isEmpty) {
                         self.displayAlert("Error", errorMsg: "No Location Found")
+                        self.startActivity(loading: false)
                     } else {
                         self.placemark = results![0]
                         self.presentAddLinkVC(self.placemark!, mapStr: self.locationTextField.text!, objectID: self.objectID)
+                        self.startActivity(loading: false)
                     }
                     
                 })
@@ -49,7 +55,7 @@ class addLocationVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func cancelBtnPressed(_ sender: AnyObject) {
-        dismiss(animated: true, completion: nil)
+        navigationController?.dismiss(animated: true, completion: nil)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -68,9 +74,19 @@ class addLocationVC: UIViewController, UITextFieldDelegate {
         if let id = objectID {
             linkVC.objectID = id
         }
-        self.present(linkVC, animated: true, completion: nil)
+        navigationController?.pushViewController(linkVC, animated: true)
     }
-    
+    func startActivity(loading: Bool) {
+        if loading {
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+            locationTextField.alpha = 0.4
+        } else {
+            activityIndicator.isHidden = true
+            activityIndicator.stopAnimating()
+            locationTextField.alpha = 1
+        }
+    }
     func displayAlert(_ errorTitle: String, errorMsg: String) {
         
         let alert = UIAlertController(title: errorTitle, message: errorMsg, preferredStyle: .alert)
